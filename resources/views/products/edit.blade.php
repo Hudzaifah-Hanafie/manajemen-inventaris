@@ -1,38 +1,56 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.app')
 
-<head>
-    <title>Edit Barang</title>
-</head>
+@section('content')
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2>Edit Barang: {{ $product->name }}</h2>
+            </div>
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul class="mb-0">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <form action="/products/{{ $product->id }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nama Barang:</label>
+                            <input type="text" name="name" id="name" value="{{ $product->name }}"
+                                class="form-control" required>
+                        </div>
 
-<body>
-    <h1>Edit Barang: {{ $product->name }}</h1>
-    <form action="/products/{{ $product->id }}" method="POST">
-        @csrf
-        @method('PUT')
-        <div>
-            <label for="name">Nama Barang:</label><br>
-            <input type="text" name="name" value="{{ $product->name }}" required>
-        </div><br>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Deskripsi:</label>
+                            <textarea name="description" id="description" class="form-control">{{ $product->description }}</textarea>
+                        </div>
 
-        <div>
-            <label for="">Deskripsi:</label><br>
-            <textarea name="description">{{ $product->description }}</textarea>
-        </div><br>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="stock" class="form-label">Stok:</label>
+                                <input type="number" name="stock" id="stock" value="{{ $product->stock }}"
+                                    class="form-control" required>
+                            </div>
 
-        <div>
-            <label for="stock">Stok:</label><br>
-            <input type="number" name="stock" value="{{ $product->stock }}" required>
-        </div><br>
-
-        <div>
-            <label for="price">Harga:</label><br>
-            <input type="number" name="price" value="{{ $product->price }}" required>
-        </div><br>
-
-        <button type="submit">Simpan Barang</button>
-        <a href="/products">Batal</a>
-    </form>
-</body>
-
-</html>
+                            <div class="col-md-6 mb-3">
+                                <label for="price" class="form-label">Harga:</label>
+                                <input type="number" name="price" id="price" value="{{ $product->price }}"
+                                    class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <button type="submit" class="btn btn-success">Simpan Barang</button>
+                            <a href="/products" class="btn btn-secondary">Batal</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
