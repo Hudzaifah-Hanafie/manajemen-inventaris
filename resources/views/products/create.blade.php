@@ -17,7 +17,7 @@
             @endif
             <div class="card shadow-sm">
                 <div class="card-body">
-                    <form action="/products" method="POST">
+                    <form action="/products" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
                             <label for="name" class="form-label">Nama Barang:</label>
@@ -52,6 +52,11 @@
                                 <input type="number" name="price" id="price" value="{{ old('price') }}"
                                     class="form-control" required>
                             </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="image" class="form-label">Foto Barang</label>
+                            <input type="file" name="image" id="image" class="form-control">
                         </div>
 
                         <div class="mt-3">

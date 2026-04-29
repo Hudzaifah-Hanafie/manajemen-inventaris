@@ -46,6 +46,7 @@
                         <th>Harga</th>
                         <th>Kategori</th>
                         <th>Deskripsi</th>
+                        <th>Foto</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -57,6 +58,13 @@
                             <td>Rp {{ number_format($product->price, 0, ',', '.') }}</td>
                             <td>{{ $product->category->name ?? 'Tanpa Kategori' }}</td>
                             <td>{{ $product->description }}</td>
+                            <td>
+                                @if ($product->image)
+                                    <img src="{{ asset('storage/' . $product->image) }}" width="50" height="50" class="img-thumbnail">
+                                @else
+                                    <span class="text-muted">No Image</span>
+                                @endif
+                            </td>
                             <td>
                                 <a href="/products/{{ $product->id }}/edit" class="btn btn-sm btn-warning">Edit</a>
                                 <form action="/products/{{ $product->id }}" method="POST" style="display: inline">

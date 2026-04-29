@@ -17,7 +17,7 @@
             @endif
             <div class="card shadow-sm">
                 <div class="card-body">
-                    <form action="/products/{{ $product->id }}" method="POST">
+                    <form action="/products/{{ $product->id }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="mb-3">
@@ -57,6 +57,12 @@
                                     class="form-control" required>
                             </div>
                         </div>
+
+                        <div class="mb-3">
+                            <label for="image" class="form-label">Foto Barang</label>
+                            <input type="file" name="image" id="image" class="form-control">
+                        </div>
+
                         <div class="mt-3">
                             <button type="submit" class="btn btn-success">Simpan Barang</button>
                             <a href="/products" class="btn btn-secondary">Batal</a>

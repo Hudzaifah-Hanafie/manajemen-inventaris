@@ -37,7 +37,8 @@ class ProductController extends Controller
             'stock' => 'required|numeric|min:0',
             'price' => 'required|numeric|min:0',
             'description' => 'nullable',
-            'category_id' => 'nullable|exists:categories,id'
+            'category_id' => 'nullable|exists:categories,id',
+            'image' => 'nillable|image|mimes:jpeg,jpg,png|max:2048'
         ]);
         $product = new Product();
         $product->name = $request->name;
@@ -45,8 +46,13 @@ class ProductController extends Controller
         $product->stock = $request->stock;
         $product->price = $request->price;
         $product->category_id = $request->category_id;
-        $product->save();
 
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('products', 'public');
+            $product->image = $path;
+        }
+
+        $product->save();
         return redirect('/products')->with('success', 'Barang berhasil ditambahkan!');
     }
 
