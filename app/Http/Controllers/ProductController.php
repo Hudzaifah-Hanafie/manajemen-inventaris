@@ -14,7 +14,9 @@ class ProductController extends Controller
         $products = Product::when($search, function ($query) use ($search) {
             return $query->where('name', 'like', '%' . $search . '%')
                 ->orWhere('description', 'like', '%' . $search . '%');
-        })->get();
+        })
+            ->latest()
+            ->paginate(5);
 
         return view('products.index', compact('products'));
     }

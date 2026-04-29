@@ -68,6 +68,9 @@
                     @endforeach
                 </tbody>
             </table>
+            <div class="mt-3">
+                {{ $products->withQueryString()->links() }}
+            </div>
         </div>
     </div>
 @endsection
