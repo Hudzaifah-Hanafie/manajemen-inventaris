@@ -7,16 +7,21 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::all();
+        $search = $request->search;
+
+        $products = Product::when($search, function ($query) use ($search) {
+            return $query->where('name', 'like', '%' . $search . '%')
+                ->orWhere('description', 'like', '%' . $search . '%');
+        })->get();
 
         return view('products.index', compact('products'));
     }
 
     public function create()
     {
-        return view('products.create');    
+        return view('products.create');
     }
 
     public function store(Request $request)
@@ -51,7 +56,7 @@ class ProductController extends Controller
             'price' => 'required|numeric|min:0',
             'description' => 'nullable'
         ]);
-        
+
         $product = Product::findOrFail($id);
 
         $product->name = $request->name;
@@ -62,7 +67,7 @@ class ProductController extends Controller
 
         return redirect('/products')->with('success', 'Barang berhasil diperbarui!');
     }
-    
+
     public function destroy($id)
     {
         $product = Product::findOrFail($id);

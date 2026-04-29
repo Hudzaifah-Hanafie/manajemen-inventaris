@@ -1,10 +1,31 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2>Daftar Barang Inventaris</h2>
-        <a href="/products/create" class="btn btn-primary">Tambah Barang Baru</a>
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <h2>Daftar Barang Inventaris</h2>
+        </div>
+        <div class="col-md-6 text-end">
+            <a href="/products/create" class="btn btn-primary">Tambah Barang Baru</a>
+        </div>
     </div>
+
+    {{-- Pencarian --}}
+    <div class="card mb-3">
+        <div class="card-body">
+            <form action="/products" method="GET" class="row g-3">
+                <div class="col-md-10">
+                    <input type="text" name="search" id="search" class="form-control"
+                        placeholder="Cari nama barang..." value="{{ request('search') }}">
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-secondary w-100">Cari</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    {{-- Notifikasi --}}
     @if (session('success'))
         <div style="padding: 10px; background-color: #d4edda; color: #155724; margin-bottom: 10px">
             {{ session('success') }}
