@@ -31,6 +31,19 @@
                             <textarea name="description" id="description" class="form-control">{{ $product->description }}</textarea>
                         </div>
 
+                        <div class="mb-3">
+                            <label for="category_id" class="form-label">Kategori</label>
+                            <select name="category_id" id="category_id" class="form-control">
+                                <option value="">-- Pilih Kategori --</option>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}"
+                                        {{ $product->category_id == $category->id ? 'selected' : '' }}>
+                                        {{ $category->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="stock" class="form-label">Stok:</label>

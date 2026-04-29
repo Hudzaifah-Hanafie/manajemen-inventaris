@@ -44,6 +44,7 @@
                         <th>Nama</th>
                         <th>Stok</th>
                         <th>Harga</th>
+                        <th>Kategori</th>
                         <th>Deskripsi</th>
                         <th>Aksi</th>
                     </tr>
@@ -54,6 +55,7 @@
                             <td>{{ $product->name }}</td>
                             <td><span class="badge bg-info text-dark">{{ $product->stock }}</span></td>
                             <td>Rp {{ number_format($product->price, 0, ',', '.') }}</td>
+                            <td>{{ $product->category->name ?? 'Tanpa Kategori' }}</td>
                             <td>{{ $product->description }}</td>
                             <td>
                                 <a href="/products/{{ $product->id }}/edit" class="btn btn-sm btn-warning">Edit</a>
