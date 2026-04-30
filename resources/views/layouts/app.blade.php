@@ -10,17 +10,21 @@
 </head>
 
 <body class="bg-light">
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+        <div class="container">
+            <a class="navbar-brand" href="/">Inventaris App</a>
+            <div class="navbar-nav">
+                <a href="/" class="nav-link {{ request()->is('/') ? 'active' : '' }}">Dashboard</a>
+                <a href="/products" class="nav-link {{ request()->is('products*') ? 'active' : '' }}">Data Barang</a>
+            </div>
+        </div>
+    </nav>
+
     <div class="container">
-      <a class="navbar-brand" href="/products">Inventaris App</a>
+        @yield('content')
     </div>
-  </nav>
 
-  <div class="container">
-    @yield('content')
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
