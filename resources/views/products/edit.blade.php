@@ -59,8 +59,23 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="image" class="form-label">Foto Barang</label>
-                            <input type="file" name="image" id="image" class="form-control">
+                            <label for="image" class="form-label">Foto Barang (Biarkan kosong kalau tidak ingin
+                                ganti)</label>
+
+                            @if ($product->image)
+                                <div class="mb-2">
+                                    <img src="{{ asset('storage/' . $product->image) }}" id="preview-image" width="200"
+                                        class="img-thumbnail d-block">
+                                </div>
+                            @else
+                                <div class="mb-2">
+                                    <img src="#" id="preview-image" alt="Preview" class="img-thumbnail"
+                                        style="display: none; max-height: 200px;">
+                                </div>
+                            @endif
+
+                            <input type="file" name="image" id="image-input" class="form-control" accept="image/*"
+                                onchange="previewImage()">
                         </div>
 
                         <div class="mt-3">
@@ -73,3 +88,23 @@
         </div>
     </div>
 @endsection
+
+<script>
+    function previewImage() {
+        const image = document.querySelector('#image-input');
+        const imgPreview = document.querySelector('#preview-image');
+
+        if (image.files && image.files[0]) {
+            // Menampilkan Gambar
+            imgPreview.style.display = 'block';
+
+            // Mengambil data file
+            const oFReader = new FileReader();
+            oFReader.readAsDataURL(image.files[0]);
+
+            oFReader.onload = function(oFREvent) {
+                imgPreview.src = oFREvent.target.result;
+            }
+        }
+    }
+</script>
