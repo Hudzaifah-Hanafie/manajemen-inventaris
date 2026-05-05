@@ -15,6 +15,8 @@ Route::middleware('guest')->group(function () {
 
 // Route Auth (Hanya bisa diakses jika SUDAH login)
 Route::middleware('auth')->group(function () {
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
     Route::get('/', [DashboardController::class, 'index']);
     Route::get('/products', [ProductController::class, 'index']);
     Route::get('/products/create', [ProductController::class, 'create']);
