@@ -74,6 +74,10 @@
                             <a href="/products" class="nav-link px-3 {{ request()->is('products*') ? 'active' : '' }}">Data
                                 Barang</a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('categories.index') }}"
+                                class="nav-link px-3 {{ request()->is('categories*') ? 'active' : '' }}">Kategori</a>
+                        </li>
 
                         <!-- Akun Dropdown -->
                         <li class="nav-item dropdown ms-lg-3">
