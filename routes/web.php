@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Route;
 
 // Route Guest (Hanya bisa diakses jika BELUM login)
@@ -26,4 +27,6 @@ Route::middleware('auth')->group(function () {
     Route::put('/products/{id}', [ProductController::class, 'update']);
     Route::delete('/products/{id}', [ProductController::class, 'destroy']);
     Route::resource('categories', CategoryController::class);
+    Route::get('/reports/products/pdf', [ReportController::class, 'productReport'])->name('reports.products.pdf');
+    Route::get('/reports/products/excel', [ReportController::class, 'productExcel'])->name('reports.products.excel');
 });

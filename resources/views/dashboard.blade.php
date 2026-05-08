@@ -50,6 +50,16 @@
         </div>
     </div>
 
+    <a href="{{ route('reports.products.pdf') }}" class="btn btn-danger mb-3">
+        <i class="bi bi-file-earmark-pdf"></i> Download Laporan PDF
+    </a>
+
+    <a href="{{ route('reports.products.excel') }}" class="btn btn-success mb-3">
+        <i class="bi bi-file-earmark-spreadsheet"></i> Download Laporan CSV (Excel)
+    </a>
+
+
+
     <div class="row mt-4">
         <div class="col-md-12">
             <div class="card shadow-sm">
